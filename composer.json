@@ -1,0 +1,20 @@
+{
+  "name": "mursalow/myshop",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "kenan",
+      "email": "email@example.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "myshop\\": "vendor/myshop",
+      "app\\": "app"
+    }
+  },
+  "require": {
+  }
+}
