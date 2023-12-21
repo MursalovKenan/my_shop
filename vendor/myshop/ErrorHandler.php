@@ -12,6 +12,25 @@ class ErrorHandler
             error_reporting(0);
         }
         set_exception_handler([$this, 'exceptionHandler']);
+        set_error_handler([$this, 'errorHandler']);
+        ob_start();
+        register_shutdown_function([$this, 'fatalErrorHandler']);
+    }
+
+    public function errorHandler($errno, $errstr, $errfile, $errline)
+    {
+        $this->logError($errstr, $errfile, $errline);
+        $this->displayError($errno,$errstr, $errfile, $errline);
+    }
+
+    public function fatalErrorHandler()
+    {
+        $error = error_get_last();
+        if (!empty($error) && $error['type'] && (E_ERROR | E_PARSE | E_COMPILE_ERROR | E_CORE_ERROR)) {
+            $this->logError($error['message'], $error['file'], $error['line']);
+            ob_end_clean();
+            $this->displayError($error['type'], $error['message'], $error['file'], $error['line']);
+        }
     }
 
     public function exceptionHandler(\Exception $e)
@@ -23,7 +42,7 @@ class ErrorHandler
     protected function logError($message, $file, $line)
     {
         file_put_contents(LOGS . '/errors.log',
-        '[' , date('Y-m-d H:i:s') . "] error message: {$message} | error file: {$file} | error line: {$line}\n========================\n");
+        '[' . date('Y-m-d H:i:s') . "] error message: {$message} | error file: {$file} | error line: {$line}\n========================\n");
     }
 
     protected function displayError($errno, $errstr, $errfile, $errline, $response = 500)
