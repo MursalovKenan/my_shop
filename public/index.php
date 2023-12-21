@@ -5,7 +5,7 @@ if (PHP_MAJOR_VERSION < 8) {
 }
 
 require_once dirname(__DIR__) . '/config/init.php';
+require_once HELPERS . '/functions.php';
+require_once CONFIG . '/routes.php';
 new \myshop\App();
-//echo \myshop\App::$app->getProperty('pagination');
-//var_dump(\myshop\App::$app->getProperties());
-throw new Exception('some error happend');
+debug(\myshop\Router::getRoutes());
