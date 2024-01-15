@@ -1,2 +1,6 @@
-[2023-12-21 07:53:05] error message: http_response_code(): Cannot set response code - headers already sent (output started at /var/www/vendor/myshop/App.php:11) | error file: /var/www/vendor/myshop/ErrorHandler.php | error line: 51
+[2023-12-22 10:57:22] error message: Uncaught TypeError: myshop\ErrorHandler::exceptionHandler(): Argument #1 ($e) must be of type Exception, ArgumentCountError given in /var/www/vendor/myshop/ErrorHandler.php:36
+Stack trace:
+#0 [internal function]: myshop\ErrorHandler->exceptionHandler(Object(ArgumentCountError))
+#1 {main}
+  thrown | error file: /var/www/vendor/myshop/ErrorHandler.php | error line: 36
 ========================

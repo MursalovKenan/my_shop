@@ -3,6 +3,8 @@
 use myshop\Router;
 
 Router::add('^admin/?$', ['controller' => 'Main', 'action' => 'index', 'admin_prefix' => 'admin']);
-Router::add('^(p<controller>[a-z-]+)/(^p<action>[a-z-]+)/?$', ['admin_prefix' => 'admin']);
-Router::add('^$', ['controller' => 'Main', 'action' => 'index']);
-Router::add('^(p<controller>[a-z-]+)/(^p<action>[a-z-]+)/?$');
+Router::add('^admin/(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$', ['admin_prefix' => 'admin']);
+
+Router::add('^$', ['controller' => 'Main']);
+
+Router::add('^(?P<controller>[a-z-]+)/(?P<action>[a-z-]+)/?$');
